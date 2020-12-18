@@ -1,5 +1,5 @@
 import { ERROR_MESSAGE, INPUT_LIMIT } from "../common/common-const.js";
-import Line from "../objects/line.js";
+import Line from "./objects/line.js";
 
 export default class LinesModel {
   constructor() {

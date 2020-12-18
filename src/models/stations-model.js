@@ -1,5 +1,5 @@
 import { INPUT_LIMIT, ERROR_MESSAGE } from "../common/common-const.js";
-import Station from "../objects/station.js";
+import Station from "./objects/station.js";
 
 export default class StationsModel {
   constructor() {
