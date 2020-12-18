@@ -33,21 +33,25 @@ export default class StationManagerController extends Controller {
     });
   }
   _addEventToAllDeleteButtons() {
-    this.addClickEventByID(STATION_MANAGER.TABLE_ID, (event) => {
-      if (event.target.className !== STATION_MANAGER.DELETE_BUTTON_CLASS) {
-        return;
-      }
-      if (!confirm(CONFIRM_MESSAGE.DELETE_CONFIRM)) {
-        return;
-      }
-      try {
-        const stationName = event.target.dataset.name;
-        this._models.linesModel.hasValidStationToDelete(stationName);
-        const stations = this._models.stationsModel.deleteStation(stationName);
-        this.updateTable(stations);
-      } catch (error) {
-        alert(error);
-      }
-    });
+    this.addClickEventByID(
+      STATION_MANAGER.TABLE_ID,
+      this._callbackOfDeleteButton
+    );
+  }
+  _callbackOfDeleteButton(event) {
+    if (event.target.className !== STATION_MANAGER.DELETE_BUTTON_CLASS) {
+      return;
+    }
+    if (!confirm(CONFIRM_MESSAGE.DELETE_CONFIRM)) {
+      return;
+    }
+    try {
+      const stationName = event.target.dataset.name;
+      this._models.linesModel.hasValidStationToDelete(stationName);
+      const stations = this._models.stationsModel.deleteStation(stationName);
+      this.updateTable(stations);
+    } catch (error) {
+      alert(error);
+    }
   }
 }

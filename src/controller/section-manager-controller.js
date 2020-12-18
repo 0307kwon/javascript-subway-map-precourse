@@ -67,21 +67,10 @@ export default class SectionManagerController extends Controller {
     );
   }
   _addEventToAllDeleteButton() {
-    this.addClickEventByID(SECTION_MANAGER.TABLE_ID, (event) => {
-      if (event.target.className !== SECTION_MANAGER.DELETE_BUTTON_CLASS) {
-        return;
-      }
-      if (!confirm(CONFIRM_MESSAGE.DELETE_CONFIRM)) {
-        return;
-      }
-      try {
-        const stationName = event.target.dataset.name;
-        this._models.linesModel.deleteSection(this.lineToManage, stationName);
-        this.updateContents();
-      } catch (error) {
-        alert(error);
-      }
-    });
+    this.addClickEventByID(
+      SECTION_MANAGER.TABLE_ID,
+      this._callbackOfDeleteButton.bind(this)
+    );
   }
   _callbackOfRegisterButton() {
     const indexToAdd = this.getInputTextByID(SECTION_MANAGER.ORDER_INPUT_ID);
@@ -94,6 +83,21 @@ export default class SectionManagerController extends Controller {
         selectedStation,
         indexToAdd
       );
+      this.updateContents();
+    } catch (error) {
+      alert(error);
+    }
+  }
+  _callbackOfDeleteButton(event) {
+    if (event.target.className !== SECTION_MANAGER.DELETE_BUTTON_CLASS) {
+      return;
+    }
+    if (!confirm(CONFIRM_MESSAGE.DELETE_CONFIRM)) {
+      return;
+    }
+    try {
+      const stationName = event.target.dataset.name;
+      this._models.linesModel.deleteSection(this.lineToManage, stationName);
       this.updateContents();
     } catch (error) {
       alert(error);
