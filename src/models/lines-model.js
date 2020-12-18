@@ -5,7 +5,6 @@ export default class LinesModel {
   constructor() {
     this._lines = [];
   }
-
   addLine(name, startStationName, endStationName) {
     this.hasValidLineInput(name, startStationName, endStationName);
     this._lines.push(new Line(name, startStationName, endStationName));

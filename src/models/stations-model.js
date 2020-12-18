@@ -5,7 +5,6 @@ export default class StationsModel {
   constructor() {
     this._stations = [];
   }
-
   addStation(name) {
     this.hasValidStationInput(name);
     this._stations.push(new Station(name));

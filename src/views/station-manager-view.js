@@ -9,7 +9,6 @@ export default class StationManagerView extends View {
     const container = document.getElementById(this.containerID);
     container.innerHTML = TEMPLATE.STATION_MANAGER;
   }
-
   setTable([...lists]) {
     let tableContents = TEMPLATE.STATION_TABLE_HEADER;
     lists.forEach(([...list]) => {
@@ -19,6 +18,9 @@ export default class StationManagerView extends View {
       );
     });
     this.setInnerHTMLByID(STATION_MANAGER.TABLE_ID, tableContents);
+  }
+  clearInput() {
+    this.clearInputByID(STATION_MANAGER.NAME_INPUT_ID);
   }
 
   _makeTableRow(className, [name, ...elements]) {
@@ -31,9 +33,5 @@ export default class StationManagerView extends View {
     return `
     <tr>${tableInnerHTML}</tr>
     `;
-  }
-
-  clearInput() {
-    this.clearInputByID(STATION_MANAGER.NAME_INPUT_ID);
   }
 }

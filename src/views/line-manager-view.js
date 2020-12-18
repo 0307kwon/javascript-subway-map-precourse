@@ -25,6 +25,9 @@ export default class LineManagerView extends View {
     });
     this.setInnerHTMLByID(LINE_MANAGER.TABLE_ID, tableContents);
   }
+  clearInput() {
+    this.clearInputByID(LINE_MANAGER.NAME_INPUT_ID);
+  }
 
   _makeTableRow(className, [name, ...elements]) {
     const list = [name, ...elements];
@@ -36,8 +39,5 @@ export default class LineManagerView extends View {
     return `
     <tr>${tableInnerHTML}</tr>
     `;
-  }
-  clearInput() {
-    this.clearInputByID(LINE_MANAGER.NAME_INPUT_ID);
   }
 }

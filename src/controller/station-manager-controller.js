@@ -4,28 +4,28 @@ import Controller from "./controller.js";
 export default class StationManagerController extends Controller {
   constructor(view, models) {
     super(view, models);
-    this._updateInitialView();
+    this.updateInitialView();
     this._addEventToAddButton();
     this._addEventToAllDeleteButtons();
   }
-
-  _updateInitialView() {
+  updateInitialView() {
     this._view.setInitialView();
-    this._updateTable(this._models.stationsModel.getStations());
+    this.updateTable(this._models.stationsModel.getStations());
   }
-  _updateTable(stations) {
+  updateTable(stations) {
     const processedStations = stations.map((station) => {
       return [station.name];
     });
     this._view.setTable(processedStations);
   }
+
   _addEventToAddButton() {
     this.addClickEventByID(STATION_MANAGER.ADD_BUTTON_ID, () => {
       try {
         const stations = this._models.stationsModel.addStation(
           this.getInputTextByID(STATION_MANAGER.NAME_INPUT_ID)
         );
-        this._updateTable(stations);
+        this.updateTable(stations);
         this._view.clearInput();
       } catch (error) {
         alert(error);
@@ -44,7 +44,7 @@ export default class StationManagerController extends Controller {
         const stationName = event.target.dataset.name;
         this._models.linesModel.hasValidStationToDelete(stationName);
         const stations = this._models.stationsModel.deleteStation(stationName);
-        this._updateTable(stations);
+        this.updateTable(stations);
       } catch (error) {
         alert(error);
       }

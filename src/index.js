@@ -16,7 +16,6 @@ function addClickEventByID(id, callbackFunction) {
   const button = document.getElementById(id);
   button.addEventListener("click", callbackFunction);
 }
-
 function initializeMenuabar() {
   const container = document.getElementById(CONTAINER.MENUBAR_ID);
   container.innerHTML = TEMPLATE.MENUBAR;

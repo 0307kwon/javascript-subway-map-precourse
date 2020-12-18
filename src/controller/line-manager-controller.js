@@ -4,23 +4,16 @@ import Controller from "./controller.js";
 export default class LineManagerController extends Controller {
   constructor(view, models) {
     super(view, models);
-    this._updateInitialView();
+    this.updateInitialView();
     this._addEventToAddButton();
     this._addEventToAllDeleteButtons();
   }
-
-  _updateInitialView() {
+  updateInitialView() {
     this._view.setInitialView();
-    this._updateTable(this._models.linesModel.getLines());
+    this.updateTable(this._models.linesModel.getLines());
     this._updateSelector();
   }
-  _updateSelector() {
-    const stations = this._models.stationsModel.getStations();
-    const stationNames = stations.map((station) => station.name);
-    this._view.setStartStationSelector(stationNames);
-    this._view.setEndStationSelector(stationNames);
-  }
-  _updateTable(lines) {
+  updateTable(lines) {
     const processedLines = lines.map((line) => {
       return [
         line.name,
@@ -30,6 +23,13 @@ export default class LineManagerController extends Controller {
     });
     this._view.setTable(processedLines);
   }
+
+  _updateSelector() {
+    const stations = this._models.stationsModel.getStations();
+    const stationNames = stations.map((station) => station.name);
+    this._view.setStartStationSelector(stationNames);
+    this._view.setEndStationSelector(stationNames);
+  }
   _addEventToAddButton() {
     this.addClickEventByID(LINE_MANAGER.ADD_BUTTON_ID, () => {
       try {
@@ -38,7 +38,7 @@ export default class LineManagerController extends Controller {
           this.getSelectorOptionByID(LINE_MANAGER.START_SELECTOR_ID),
           this.getSelectorOptionByID(LINE_MANAGER.END_SELECTOR_ID)
         );
-        this._updateTable(lines);
+        this.updateTable(lines);
         this._view.clearInput();
       } catch (error) {
         alert(error);
@@ -55,7 +55,7 @@ export default class LineManagerController extends Controller {
       }
       const name = event.target.dataset.name;
       const lines = this._models.linesModel.deleteLine(name);
-      this._updateTable(lines);
+      this.updateTable(lines);
     });
   }
 }

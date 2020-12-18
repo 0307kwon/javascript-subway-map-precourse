@@ -23,7 +23,6 @@ export default class SectionManagerView extends View {
     });
     container.innerHTML = containerInnerHTML;
   }
-
   setSectionManagerContainer() {
     const container = document.getElementById(
       SECTION_MANAGER.MANAGER_CONTAINER_ID
